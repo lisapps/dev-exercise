@@ -1,3 +1,15 @@
+@mixin desktop {
+    @media (min-width: #{$screen-lg}) {
+      @content;
+    }
+}
+
+@mixin mobile {
+    @media (min-width: #{$screen-sm}) {
+        @content;
+    }
+}
+
 // grid variables
 $grid-columns: 12;
 $grid-max-width: 58em;
@@ -13,18 +25,6 @@ $grid-max-width: 58em;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-}
-
-@mixin desktop {
-    @media (min-width: #{$screen-lg}) {
-      @content;
-    }
-}
-
-@mixin mobile {
-    @media (min-width: #{$screen-sm}) {
-        @content;
-    }
 }
 
 [class*='column-'] {
@@ -117,7 +117,10 @@ h3:before {
         background-color: $color-main;
         color: $color-main-text;
     }
-    
+    &:hover {
+        background-color: black;
+        color: white;
+    }
 }
 .fa-external-link {
     padding-left: 4px;
