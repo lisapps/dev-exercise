@@ -1,0 +1,133 @@
+// grid variables
+$grid-columns: 12;
+$grid-max-width: 58em;
+
+
+@mixin border-box {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+    }
+
+@mixin flex {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+@mixin desktop {
+    @media (min-width: #{$screen-lg}) {
+      @content;
+    }
+}
+
+@mixin mobile {
+    @media (min-width: #{$screen-sm}) {
+        @content;
+    }
+}
+
+[class*='column-'] {
+    float: left;
+    padding: 1em;
+    width: 100%;
+    min-height: 1px; 
+} 
+
+.grid {      
+    width: 95%;
+    max-width: $grid-max-width;     
+}
+
+@for $i from 1 through 12 {
+    .c-grid__column--#{$i} { 
+            width: 100%;
+        }
+}
+
+@include desktop {
+    @for $i from 1 through 12 {
+        .c-grid__column--#{$i} { 
+                width: 100% / 12 * $i;
+            }
+        }
+    }
+
+.c-card {
+    border: 1.5px solid #efefef;
+    border-radius: 4px;
+    padding: 0;
+    &.card-img-top {
+        .c-card--img {
+            border-top-left-radius: calc(.25rem - 1px);
+            border-top-right-radius: calc(.25rem - 1px);
+        }
+    }
+    &.card-img-bottom {
+        @include border-box;
+        @include flex;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: start;
+        -moz-box-align: start;
+        -ms-flex-align: start;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+        .c-card--img {
+            border-bottom-left-radius: calc(.25rem - 1px);
+            border-bottom-right-radius: calc(.25rem - 1px);
+            -webkit-box-ordinal-group: 2;
+            -moz-box-ordinal-group: 2;
+            -ms-flex-order: 2;
+            -webkit-order: 2;
+            order: 2;
+            margin-top: 7px;
+        }
+    }
+    &.card-small {
+        .c-card--img, .card-text, .btn  {display: none;}
+    }
+    .c-card--body {
+            padding: 16px;
+        }
+
+}
+
+@mixin font-awesome($content){
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    content: $content;
+}
+
+h3:before {
+    @include font-awesome("\f041");
+    color: $color-main;
+    padding-right: 5px;
+    font-size: .9em;
+}
+
+.btn {
+    &.btn-red {
+        background-color: $color-main;
+        color: $color-main-text;
+    }
+    
+}
+.fa-external-link {
+    padding-left: 4px;
+    font-size: 0.9em!important;
+}
+
+/**** testing ****/
+//test media mixins
+/* p {
+    @include desktop {
+    color: pink!important;
+    }
+} */
